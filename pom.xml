@@ -1,33 +1,103 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>com.epam.cdp</groupId>
   <artifactId>cal</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
-
   <name>cal</name>
   <url>http://maven.apache.org</url>
-
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
+ 
   <dependencies>
     <dependency>
     <groupId>org.testng</groupId>
     <artifactId>testng</artifactId>
     <version>6.14.3</version>
     <scope>test</scope>
-</dependency>
-
-<dependency>
+	
+	</dependency>
+	<dependency>
     <groupId>junit</groupId>
     <artifactId>junit</artifactId>
     <version>4.12</version>
     <scope>test</scope>
-</dependency>
+	</dependency>
+ </dependencies>
 
-  </dependencies>
+<build>
+	<plugins>
+		<plugin>
+      		<groupId>org.apache.maven.plugins</groupId>
+      		<artifactId>maven-compiler-plugin</artifactId>
+      		<version>2.3.2</version>
+      		<configuration>
+        		<source>1.7</source>
+       			 <target>1.7</target>
+     		 </configuration>
+    	</plugin>
+    </plugins>
+ </build>	 
+  
+  <profiles>
+   	<profile>
+   		 <id>testNGtest</id>
+   		 	<build>
+       			<plugins>
+            		<plugin>
+	                	<groupId>org.apache.maven.plugins</groupId>
+	                	<artifactId>maven-surefire-plugin</artifactId>
+                		<version>2.19.1</version>
+                	
+                		<configuration>    
+                		<activation>
+                		<activeByDefault>true</activeByDefault>
+                		</activation>        		
+                            <redirectTestOutputToFile>false</redirectTestOutputToFile>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>
+                                   src\test\resourcestestng.xml         
+                                </suiteXmlFile>
+                            </suiteXmlFiles>
+                        </configuration>
+            		</plugin>
+
+        		</plugins>
+			</build>		 	
+	</profile>
+	
+	   	<profile>
+   		 <id>testJUnit</id>
+   		 	<build>
+       			<plugins>
+            		<plugin>
+	                	<groupId>org.apache.maven.plugins</groupId>
+	                	<artifactId>maven-surefire-plugin</artifactId>
+                		<version>2.11</version>
+					<dependencies>
+ 						<dependency>
+  							<groupId>org.apache.maven.surefire</groupId>
+ 							 <artifactId>surefire-junit47</artifactId>
+ 							 <version>2.12</version>
+ 						</dependency>
+					</dependencies>
+                		<configuration>
+                		<activation>
+                		<activeByDefault>false</activeByDefault>
+                		</activation>   
+                		<includes>
+ 							 <include>TestSuite.class</include>
+						 </includes>
+                        </configuration>
+            		</plugin>
+
+        		</plugins>
+			</build>		 	
+	</profile>
+  </profiles>
+  
+
 </project>
