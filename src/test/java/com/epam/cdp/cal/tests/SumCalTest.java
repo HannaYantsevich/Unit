@@ -23,4 +23,3 @@ public class SumCalTest extends BaseTest {
 		};
 	}
 }
-
