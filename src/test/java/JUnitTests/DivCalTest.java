@@ -14,5 +14,15 @@ public class DivCalTest extends BaseTestJunit {
 		
 	
 }	
+	
+	@Test(expected = ArithmeticException.class)
+    public void divisionWithException() {
+        calculator.div(15,0);
+    }
 
+	@Test(timeout = 500)
+    public void timeStampTest() {
+        while (true);
+    }
+	
 }
